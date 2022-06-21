@@ -3,7 +3,9 @@ import { Delivery } from "@prisma/client";
 
 export class FindAllWithoutEndDateUseCase {
   async execute(): Promise<Delivery[]> {
-    const deliveries = await prisma.delivery.findMany({ where: { end_at: null } })
+    const deliveries = await prisma.delivery.findMany({ where: 
+      { end_at: null, id_deliveryman: null } 
+    })
 
     return deliveries
   }
