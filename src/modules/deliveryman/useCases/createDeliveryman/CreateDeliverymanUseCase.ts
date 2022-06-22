@@ -11,7 +11,7 @@ interface ICreteDeliveryman {
 export class CreateDeliverymanUseCase {
   async execute({ username, password }: ICreteDeliveryman): Promise<Deliveryman> {
     const deliverymanExist = await prisma.deliveryman.findFirst({ 
-      where: { username: { mode: 'insensitive' } } 
+      where: { username: { mode: 'insensitive', equals: username } } 
     })
 
     if (deliverymanExist) throw new Error("Deliveryman already exists");

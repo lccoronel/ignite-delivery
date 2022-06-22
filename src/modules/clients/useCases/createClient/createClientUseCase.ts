@@ -11,7 +11,12 @@ interface ICreteClient {
 export class CreateClientUseCase {
   async execute({ username, password }: ICreteClient): Promise<Clients> {
     const clientExist = await prisma.clients.findFirst({ 
-      where: { username: { mode: 'insensitive' } } 
+      where: { 
+        username: { 
+          mode: 'insensitive', 
+          equals: username 
+        } 
+      } 
     })
 
     if (clientExist) throw new Error("Client already exists");
